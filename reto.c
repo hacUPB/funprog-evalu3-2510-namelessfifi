@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include <math.h>
 
-// Función para calcular la Ley de Ohm
 void leyDeOhm() {
     float V, I, R;
     int opcion;
@@ -19,6 +18,10 @@ void leyDeOhm() {
             scanf("%f", &I);
             printf("Ingresa la Resistencia (R) en ohmios: ");
             scanf("%f", &R);
+            if (I < 0 || R < 0) {
+                printf("Error: Corriente y Resistencia deben ser positivas.\n");
+                break;
+            }
             V = I * R;
             printf("Voltaje (V) = %.2f V\n", V);
             break;
@@ -27,6 +30,10 @@ void leyDeOhm() {
             scanf("%f", &V);
             printf("Ingresa la Resistencia (R) en ohmios: ");
             scanf("%f", &R);
+            if (R <= 0) {
+                printf("Error: La Resistencia debe ser mayor que cero.\n");
+                break;
+            }
             I = V / R;
             printf("Corriente (I) = %.2f A\n", I);
             break;
@@ -35,6 +42,10 @@ void leyDeOhm() {
             scanf("%f", &V);
             printf("Ingresa la Corriente (I) en amperios: ");
             scanf("%f", &I);
+            if (I <= 0) {
+                printf("Error: La Corriente debe ser mayor que cero.\n");
+                break;
+            }
             R = V / I;
             printf("Resistencia (R) = %.2f Ohmios\n", R);
             break;
@@ -43,7 +54,6 @@ void leyDeOhm() {
     }
 }
 
-// Función para calcular el factor de potencia
 void factorDePotencia() {
     float potenciaActiva, potenciaReactiva, factorPotencia;
 
@@ -53,11 +63,15 @@ void factorDePotencia() {
     printf("Ingresa la Potencia Reactiva (Q) en voltamperios reactivos: ");
     scanf("%f", &potenciaReactiva);
 
+    if (potenciaActiva < 0 || potenciaReactiva < 0) {
+        printf("Error: Las potencias no pueden ser negativas.\n");
+        return;
+    }
+
     factorPotencia = potenciaActiva / sqrt(pow(potenciaActiva, 2) + pow(potenciaReactiva, 2));
     printf("El Factor de Potencia es: %.2f\n", factorPotencia);
 }
 
-// Función para calcular la resistencia de un conductor
 void resistenciaConductor() {
     float resistividad, longitud, area, resistencia;
 
@@ -69,11 +83,15 @@ void resistenciaConductor() {
     printf("Ingresa el Área de la Sección Transversal (A) en metros cuadrados: ");
     scanf("%f", &area);
 
+    if (resistividad < 0 || longitud < 0 || area <= 0) {
+        printf("Error: Valores inválidos. Área debe ser mayor a cero y los demás no negativos.\n");
+        return;
+    }
+
     resistencia = (resistividad * longitud) / area;
     printf("La Resistencia del Conductor es: %.2f Ohmios\n", resistencia);
 }
 
-// Función para calcular la resistencia para un LED
 void resistenciaLED() {
     float Vfuente, Vled, Iled, R;
 
@@ -84,6 +102,16 @@ void resistenciaLED() {
     scanf("%f", &Vled);
     printf("Ingresa la Corriente del LED (Iled) en amperios: ");
     scanf("%f", &Iled);
+
+    if (Vfuente < 0 || Vled < 0 || Iled <= 0) {
+        printf("Error: Voltajes no pueden ser negativos y la corriente debe ser mayor que cero.\n");
+        return;
+    }
+
+    if (Vfuente <= Vled) {
+        printf("Error: El voltaje de la fuente debe ser mayor que el del LED.\n");
+        return;
+    }
 
     R = (Vfuente - Vled) / Iled;
     printf("La Resistencia necesaria para el LED es: %.2f Ohmios\n", R);
@@ -125,3 +153,4 @@ int main() {
 
     return 0;
 }
+
