@@ -10,10 +10,10 @@ int main() {
     for (int i = 0; i < cantidad; i++) {
         printf("Ingresa el número %d: ", i + 1);
         scanf("%d", &numero);
-        suma += numero; // Sumar el número a la suma total
+        suma += numero; 
     }
 
-    float media = suma / cantidad; // Calcular la media
+    float media = suma / cantidad; 
     printf("La media es: %.2f\n", media);
     return 0;
 }

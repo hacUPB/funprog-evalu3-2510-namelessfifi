@@ -10,7 +10,7 @@ int main() {
         scanf("%d", &numeros[i]);
     }
 
-    minimo = numeros[0]; // Asumimos que el primer número es el mínimo
+    minimo = numeros[0]; 
     for (int i = 1; i < 5; i++) {
         if (numeros[i] < minimo) {
             minimo = numeros[i];
